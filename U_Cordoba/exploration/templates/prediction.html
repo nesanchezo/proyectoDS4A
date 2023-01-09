@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+.dataframe thead th {background-color: #348829; color: white; padding: 8px;}
+.dataframe tbody th {padding: 8px;}
+.dataframe tbody td {padding: 8px;}
+.navbar{
+        font-size: 16px;
+}
+#id_PUNT_SOCIALES_CIUDADANAS{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_PUNT_INGLES{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_PUNT_LECTURA_CRITICA{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_PUNT_MATEMATICAS{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_PUNT_C_NATURALES{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_Estrato{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_Programa{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+#id_AreaReside{border-radius: 5px; border-left: 0.25rem solid #348829!important;border-right: 0.2rem solid #348829; border-top: 0.2rem solid #348829; border-bottom: 0.2rem solid #348829;}
+</style>
+</head>
+  
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  {% load static %}
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">   
+
+<title>Piloto Predicción Universidad de Cordoba</title>
+</head>
+<body style="background-color: #f8f9fc;">
+
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="background-color: #348829;">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url 'predict' %}">Predicciones</a>
+    </div>
+  </div>
+</nav>
+</div>
+
+<div class="container">
+<div class="row mt-5 mb-5 ms-5 me-5">
+<h1 align="center">Piloto Predicción Universidad de Cordoba</h1>
+</div>
+</div>
+
+<div class="container">
+<label for='competencia'>Ingrese los datos para realizar la predicción:</label>
+<form method = "POST">
+    {{ formUno.as_table }}
+    {%csrf_token%}
+    <input class="btn btn-primary" type = "submit" value = "Submit">
+</form>
+</div>
+
+<div class="container">
+<h2>Predicción</h2>
+        <table class="table">
+          <tbody>
+            {{ data_1|safe }}
+          </tbody>
+        </table>
+</div>
+
+<hr style="margin:30px 80px 30px 80px">
+<div class="container">
+<h3 align="center">Visualización de los resultados</h3> 
+</div>
+
+<div class="container">
+<div class="row">
+<div class="card border-left-primary shadow h-100 py-2" style="border-left: 0.25rem solid #348829!important;">  
+      {% autoescape off %}
+      {{ plot_div_1 }}
+      {% endautoescape %}
+</div>
+</div>
+</div>
+  {%include 'footer.html' %}
+</body>
